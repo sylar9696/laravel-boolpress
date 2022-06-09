@@ -63,9 +63,9 @@
         </tbody>
     </table>
 
-    {{-- @if( $posts->hasPages() )
+    @if( $posts->hasPages() )
         {{ $posts->links() }}
-    @endif --}}
+    @endif
 
 </div>
 
