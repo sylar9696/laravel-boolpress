@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -46,9 +47,14 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-        // dd($data);
+        //dd($data);
 
         $post = new Post();
+
+        if(array_key_exists('image', $data)){
+            $image_url = Storage::put('post_images', $data['image'] );
+            $data['image'] = $image_url;
+        }
 
         $post->fill($data);
         $post->slug = Str::slug($post->title, '-');
@@ -102,6 +108,16 @@ class PostController extends Controller
         $data = $request->all();
         // dd($data);
         $post['slug'] = Str::slug( $request->title , '-');
+
+
+        if(array_key_exists('image', $data)){
+            if( $post->image ) Storage::delete($post->image);
+
+            $image_url = Storage::put('post_images', $data['image'] );
+            $data['image'] = $image_url;
+        }
+
+
         $post->update($data);
 
         // if ( !array_key_exists( 'tags', $data ) )  $post->tags()->detach();
