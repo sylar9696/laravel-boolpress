@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
-        <style>
+        {{-- <style>
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -60,12 +60,15 @@
 
             .m-b-md {
                 margin-bottom: 30px;
-            }
-        </style>
+            } --}}
+        {{-- </style> --}}
+
+        {{-- IMportando i file di stile compilati da webpack mix --}}
+        <link rel="stylesheet" href=" {{ asset('css/app.css') }} ">
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            {{-- @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/admin') }}">Home</a>
@@ -77,7 +80,7 @@
                         @endif
                     @endauth
                 </div>
-            @endif
+            @endif --}}
 
             <div class="content">
                 {{-- Pagina in construzione --}}
@@ -86,5 +89,7 @@
         </div>
         {{-- Richiamare il javascript con dentro vue --}}
         <script src=" {{ asset( 'js/front.js' ) }} "></script>
+        {{-- Javscript compilato da webpack di bootstrap --}}
+        <script src=" {{ asset( 'js/app.js' ) }} "></script>
     </body>
 </html>

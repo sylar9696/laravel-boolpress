@@ -17,3 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+//localhost:8000/api/test
+Route::get('/test',  function(){
+    $name = ['Alex', 'MArco', 'Roby'];
+    $frutti = ['banana', 'mela', 'pera'];
+
+    return response()->json( compact('name', 'frutti') );
+});
+
+
+//localhost:8000/api/posts
+Route::namespace('Api')->group( function(){
+    Route::get('/posts', 'PostController@index');
+});
