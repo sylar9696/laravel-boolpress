@@ -16,8 +16,15 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('updated_at', 'DESC')->with('Category','tags' )->limit(5)->get();
+        // $posts = Post::orderBy('updated_at', 'DESC')->with('Category','tags' )->limit(5)->get();
 
+        $posts = Post::orderBy('updated_at', 'DESC')->with('Category','tags' )->paginate(2);
+        // $array = ['ciao', 'test'];
+
+        // $posts = Post::all();
+        // $posts::with('Category','tags' )->get();
+
+        // return response()->json( $posts );
         return response()->json( compact('posts') );
     }
 
@@ -50,7 +57,10 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+
+        $post = Post::with( 'Category','tags' )->find($id);
+
+        return response()->json( $post );
     }
 
     /**

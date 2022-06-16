@@ -3,7 +3,8 @@
     <Header/>
     <main>
         <div class="container">
-            <PostsList/>
+            <!-- <PostsList/> -->
+            <router-view></router-view>
         </div>
         <!-- <div class="row justify-content-center">
             <div class="col-md-8">
