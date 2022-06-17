@@ -18,7 +18,7 @@
             -->
 
             <!-- Inseriamo il componente della pagination -->
-            <Pagination :pagination="pagination"/>
+            <Pagination :pagination="pagination" @on-page-change="getPosts" />
 
             <div class="card text-center" v-for="post in posts" :key="post.id">
                 <div class="card-header">
@@ -31,7 +31,7 @@
                             :style="`background-color: ${tag.color}`">{{ tag.label }}</span>
                     </p>
                     <p class="card-text">{{ post.content }}</p>
-                    <router-link :to="{ name: 'post-detail', params: { id: post.id } }" class="btn btn-primary">View</router-link>
+                    <router-link :to="{ name: 'post-detail', params: { slug: post.slug } }" class="btn btn-primary">View</router-link>
                 </div>
                 <div class="card-footer text-muted">
                     2 days ago
@@ -59,9 +59,11 @@
                 isLoading: true
             }
         },
+        // emit: [ 'on-page-change' ],
+
         methods: {
-            getPosts() {
-                axios.get("http://127.0.0.1:8000/api/posts")
+            getPosts(page = 1) {
+                axios.get("http://127.0.0.1:8000/api/posts?page=" + page)
                     .then((res) => {
                         console.log(res.data.posts.data);
 

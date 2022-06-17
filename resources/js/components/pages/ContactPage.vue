@@ -6,6 +6,9 @@
 
 <script>
 export default{
-    name: 'ContactPage'
+    name: 'ContactPage',
+    mounted() {
+        console.log(this.$route);
+    }
 }
 </script>
