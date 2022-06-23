@@ -1914,9 +1914,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Alert',
-  props: ['message', 'type']
+  // props: [ 'message', 'type']
+  props: ['type']
 });
 
 /***/ }),
@@ -2082,14 +2086,73 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Alert_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Alert.vue */ "./resources/js/components/Alert.vue");
 //
 //
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ContactPage',
+  components: {
+    Alert: _Alert_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      form: {
+        email: '',
+        message: ''
+      },
+      alertMessage: ''
+    };
+  },
+  methods: {
+    sendForm: function sendForm() {
+      var _this = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://127.0.0.1:8000/api/messages', this.form).then(function (res) {
+        _this.form.email = '', _this.form.message = '', _this.alertMessage = 'Il messaggio è stato inviato';
+      });
+    }
+  },
   mounted: function mounted() {
     console.log(this.$route);
   }
@@ -2157,6 +2220,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Alert_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Alert.vue */ "./resources/js/components/Alert.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3451,7 +3521,8 @@ var render = function () {
   return _c(
     "div",
     { class: "alert alert-" + _vm.type, attrs: { role: "alert" } },
-    [_vm._v("\n    " + _vm._s(_vm.message) + "\n")]
+    [_vm._t("default")],
+    2
   )
 }
 var staticRenderFns = []
@@ -3749,16 +3820,85 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    [
+      _c("h2", [_vm._v("COntact page")]),
+      _vm._v(" "),
+      _c("Alert", { attrs: { type: "success" } }, [
+        _vm._v("\n        " + _vm._s(_vm.alertMessage) + "\n    "),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "email" } }, [_vm._v("Email address")]),
+        _vm._v(" "),
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.form.email,
+              expression: "form.email",
+            },
+          ],
+          staticClass: "form-control",
+          attrs: { type: "email", id: "email", placeholder: "Enter email" },
+          domProps: { value: _vm.form.email },
+          on: {
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.form, "email", $event.target.value)
+            },
+          },
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "message" } }, [
+            _vm._v("Example textarea"),
+          ]),
+          _vm._v(" "),
+          _c("textarea", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.form.message,
+                expression: "form.message",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { id: "message", rows: "3" },
+            domProps: { value: _vm.form.message },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.form, "message", $event.target.value)
+              },
+            },
+          }),
+        ]),
+        _vm._v(" "),
+        _c(
+          "small",
+          { staticClass: "form-text text-muted", attrs: { id: "emailHelp" } },
+          [_vm._v("We'll never share your email with anyone else.")]
+        ),
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", on: { click: _vm.sendForm } },
+        [_vm._v("Invia")]
+      ),
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("COntact page")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -3849,9 +3989,9 @@ var render = function () {
       _c("h1", [_vm._v("Pagina singola del post: " + _vm._s(_vm.post.title))]),
       _vm._v(" "),
       _vm.isError
-        ? _c("Alert", {
-            attrs: { message: "il post non esiste", type: "danger" },
-          })
+        ? _c("Alert", { attrs: { type: "danger" } }, [
+            _vm._v("\n        Si è verificato un errore\n    "),
+          ])
         : _vm._e(),
       _vm._v(" "),
       _c("p", [_vm._v(_vm._s(_vm.post.content))]),

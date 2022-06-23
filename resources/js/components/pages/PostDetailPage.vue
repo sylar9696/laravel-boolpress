@@ -2,11 +2,18 @@
     <div>
         <h1>Pagina singola del post: {{ post.title }}</h1>
         <!-- Alert -->
-        <Alert
+        <!-- <Alert
         v-if="isError"
         message="il post non esiste"
         type="danger"
-        />
+        > -->
+
+        <Alert
+        v-if="isError"
+        type="danger"
+        >
+            Si è verificato un errore
+        </Alert>
 
 
         <p>{{ post.content }}</p>
@@ -20,6 +27,7 @@
 <script>
 import axios from 'axios';
 import Alert from '../Alert.vue';
+
     export default {
         name: 'PostDetailPage',
         data() {
